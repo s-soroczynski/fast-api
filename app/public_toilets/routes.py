@@ -1,4 +1,4 @@
-from fastapi import APIRouter, HTTPException, Depends
+from fastapi import APIRouter, HTTPException, Depends, Path
 from sqlalchemy.orm import Session
 
 from app.utils import get_db
@@ -17,6 +17,17 @@ router = APIRouter(
 async def public_toilets(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
     db_public_toilets = crud.get_public_toilets(db, skip=skip, limit=limit)
     return db_public_toilets
+
+
+@router.get("/{id}")
+async def public_toilets(id: int = Path, db: Session = Depends(get_db)):
+    db_public_toilet = crud.get_public_toilet(db, id)
+    if db_public_toilet is None:
+        raise HTTPException(
+            status_code=404,
+            detail=f"Public toilet with id {id} does not exist",
+        )
+    return db_public_toilet
 
 
 @router.post("/")

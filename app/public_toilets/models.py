@@ -11,5 +11,6 @@ class PublicToilet(Base):
     name = Column(String, index=True)
     lng = Column(Float, index=True)
     lat = Column(Float, index=True)
+    rate = Column(Integer, index=True)
     user_id = Column(Integer, ForeignKey("users.id"))
     user = relationship("User", back_populates="public_toilet")

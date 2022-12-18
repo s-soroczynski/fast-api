@@ -1,4 +1,4 @@
-from fastapi import APIRouter, HTTPException, Depends
+from fastapi import APIRouter, HTTPException, Depends, Path
 from sqlalchemy.orm import Session
 
 from app.users import crud, schemas, models, utils
@@ -24,7 +24,7 @@ async def read_users_me(current_user: models.User = Depends(utils.get_current_us
 
 
 @router.get('/{id}', response_model=schemas.UserDetails)
-async def user(id: int, db = Depends(get_db), current_user: models.User = Depends(utils.get_current_user)):
+async def user(id: int = Path(), db = Depends(get_db), current_user: models.User = Depends(utils.get_current_user)):        
     if id != current_user.id:
         raise HTTPException(
             status_code=401,
