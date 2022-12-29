@@ -6,6 +6,7 @@ class PublicToilet(BaseModel):
     lat: float
     lng: float
     rate: int
+    description: str
 
     class Config:
         orm_mode = True

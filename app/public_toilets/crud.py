@@ -14,7 +14,7 @@ def get_public_toilets(db: Session, skip: int = 0, limit: int = 100):
     return db.query(models.PublicToilet).offset(skip).limit(limit).all()
 
 def create_public_toilet(db: Session, public_toilet: schemas.PublicToilet, user: User):
-    db_public_toilet = models.PublicToilet(name=public_toilet.name, lat=public_toilet.lat, lng=public_toilet.lng, rate=public_toilet.rate, user=user)
+    db_public_toilet = models.PublicToilet(name=public_toilet.name, lat=public_toilet.lat, lng=public_toilet.lng, rate=public_toilet.rate, user=user, description=public_toilet.description)
     db.add(db_public_toilet)
     db.commit()
     db.refresh(db_public_toilet)
