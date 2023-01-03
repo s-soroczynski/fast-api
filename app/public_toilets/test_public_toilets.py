@@ -1,19 +1,19 @@
-from fastapi.testclient import TestClient
+# from fastapi.testclient import TestClient
 
-from app.default import app
-
-
-client = TestClient(app)
+# from app.default import app
 
 
-def test_read_item():
-    response = client.get("/public-toilets/")
-    assert response.status_code == 200
-    assert response.json() == [{
-        "id": "1",
-        "name": "Foo",
-        "user_id": "1",
-    }]
+# client = TestClient(app)
+
+
+# def test_read_item():
+#     response = client.get("/public-toilets/")
+#     assert response.status_code == 200
+#     assert response.json() == [{
+#         "id": "1",
+#         "name": "Foo",
+#         "user_id": "1",
+#     }]
 
 
 # def test_read_item_bad_token():

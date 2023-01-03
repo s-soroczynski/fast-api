@@ -5,6 +5,7 @@ from app.users import models, schemas
 
 
 def get_user(db: Session, id: int):
+    import pdb; pdb.set_trace()
     return db.query(models.User).filter(models.User.id == id).first()
 
 def get_user_by_email(db: Session, email: str):
