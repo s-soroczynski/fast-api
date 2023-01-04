@@ -10,6 +10,10 @@ you should be able to visit pgadmin4 at **localhost:5050**
 to start backend run in main folder `source env/bin/activate` then `uvicorn app.main:app --reload`  
 backend should be available at **http://127.0.0.1:8000**
 
+### tests
+
+to run tests db must be running, then run `pytest`
+
 ### helpers
 
 to find runing port type `sudo lsof -t -i:5432` and then u can kill it with `sudo kill -9 {id}` where **id** is returned from first command

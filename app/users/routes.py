@@ -19,12 +19,13 @@ async def users(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
 
 
 @router.get("/me")
-async def read_users_me(current_user: models.User = Depends(utils.get_current_user)):
+async def get_user_me(current_user: models.User = Depends(utils.get_current_user)):
+    # TODO should we return hashed password? Fix test if no, trelo #13
     return current_user
 
 
 @router.get('/{id}', response_model=schemas.UserDetails)
-async def user(id: int = Path(), db = Depends(get_db), current_user: models.User = Depends(utils.get_current_user)):        
+async def get_user(id: int = Path(), db = Depends(get_db), current_user: models.User = Depends(utils.get_current_user)):
     if id != current_user.id:
         raise HTTPException(
             status_code=401,
@@ -36,8 +37,8 @@ async def user(id: int = Path(), db = Depends(get_db), current_user: models.User
     return user_details
 
 
-@router.post("/")
-async def users(user: schemas.User, db: Session = Depends(get_db)):
+@router.post("/", status_code=201)
+async def create_user(user: schemas.User, db: Session = Depends(get_db)):
     db_user = crud.get_user_by_email(db, email=user.email)
     if db_user:
         raise HTTPException(status_code=400, detail="User already exist")

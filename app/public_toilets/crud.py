@@ -20,5 +20,5 @@ def create_public_toilet(db: Session, public_toilet: schemas.PublicToilet, user:
     db.refresh(db_public_toilet)
     return db_public_toilet
 
-def get_user_public_toilets(db: Session, user_id: int, skip: int = 0, limit: int = 0):
+def get_user_public_toilets(db: Session, user_id: int):
     return db.query(models.PublicToilet).filter(models.PublicToilet.user_id == user_id).all()

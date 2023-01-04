@@ -19,6 +19,6 @@ def create_user(db: Session, user: schemas.User):
     db.add(db_user)
     db.commit()
     db.refresh(db_user)
-    # TODO czy to właściwe?
+    # TODO is this correct way to remove password?
     db_user.__dict__.pop('password')
     return db_user
