@@ -12,7 +12,6 @@ from app.users.models import User
 from app.public_toilets.models import PublicToilet
 
 
-
 SQLALCHEMY_DATABASE_URL = "sqlite:///./test.db"
 
 engine = create_engine(

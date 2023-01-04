@@ -1,5 +1,3 @@
-
-
 import pytest
 
 from app.tests.helpers import override_get_db, create_pure_test_token
