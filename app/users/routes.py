@@ -24,16 +24,25 @@ async def get_user_me(current_user: models.User = Depends(utils.get_current_user
     return current_user
 
 
-@router.get('/{id}', response_model=schemas.UserDetails)
-async def get_user(id: int = Path(), db = Depends(get_db), current_user: models.User = Depends(utils.get_current_user)):
+@router.get("/{id}", response_model=schemas.UserDetails)
+async def get_user(
+    id: int = Path(),
+    db=Depends(get_db),
+    current_user: models.User = Depends(utils.get_current_user),
+):
     if id != current_user.id:
         raise HTTPException(
             status_code=401,
             detail="Could not validate credentials",
             headers={"WWW-Authenticate": "Bearer"},
         )
-    db_user_public_toilets = public_toilets_crud.get_user_public_toilets(db, user_id=current_user.id)
-    user_details: schemas.UserDetails = {"email": current_user.email, "public_toilets": db_user_public_toilets}
+    db_user_public_toilets = public_toilets_crud.get_user_public_toilets(
+        db, user_id=current_user.id
+    )
+    user_details: schemas.UserDetails = {
+        "email": current_user.email,
+        "public_toilets": db_user_public_toilets,
+    }
     return user_details
 
 
@@ -43,4 +52,3 @@ async def create_user(user: schemas.User, db: Session = Depends(get_db)):
     if db_user:
         raise HTTPException(status_code=400, detail="User already exist")
     return crud.create_user(db=db, user=user)
-

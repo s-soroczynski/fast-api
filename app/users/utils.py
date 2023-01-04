@@ -1,4 +1,3 @@
-
 from fastapi import Depends, HTTPException, status
 from sqlalchemy.orm import Session
 from jose import jwt, JWTError
@@ -27,7 +26,9 @@ def authenticate_user(username: str, password: str, db: Session):
     return user
 
 
-async def get_current_user(token: str = Depends(oauth2_scheme), db: Session = Depends(get_db)):
+async def get_current_user(
+    token: str = Depends(oauth2_scheme), db: Session = Depends(get_db)
+):
     print(token)
     credentials_exception = HTTPException(
         status_code=status.HTTP_401_UNAUTHORIZED,

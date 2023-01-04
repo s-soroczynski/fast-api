@@ -4,6 +4,7 @@ from typing import Union
 
 from app.constants import SECRET_KEY, ALGORITHM
 
+
 def create_access_token(data: dict, expires_delta: Union[timedelta, None] = None):
     to_encode = data.copy()
     if expires_delta:
