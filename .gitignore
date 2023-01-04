@@ -19,3 +19,6 @@ app/public_toilets/__pycache__
 app/__pycache__
 app/__pycache__/
 
+app/.pytest__cache
+app/.pytest__cache/
+
