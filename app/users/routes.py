@@ -20,7 +20,6 @@ async def users(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
 
 @router.get("/me")
 async def get_user_me(current_user: models.User = Depends(utils.get_current_user)):
-    # TODO should we return hashed password? Fix test if no, trelo #13
     current_user.__delattr__("password")
     return current_user
 
