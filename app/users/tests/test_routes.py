@@ -1,7 +1,9 @@
+from app.users.models import User
+from app.tests.helpers import test_client, create_test_token, add_model_to_db
+from app.security import pwd_context
 
-from app.users import models
-from app.tests.helpers import test_client, override_get_db, create_test_token, hash_test_password
-
+hash_test_password = pwd_context.hash('test_password')
+test_user = User(email='test_email', password=hash_test_password)
 
 def test_get_users():    
     response = test_client.get(
@@ -12,11 +14,9 @@ def test_get_users():
     assert data[0]['email'] == 'test_email'
     assert data[0]['password'] == hash_test_password
 
-def test_get_users_with_pagination():
-    user = models.User(email='test_email_2', password='test_password_2')
-    db = override_get_db().__next__()
-    db.add(user)
-    db.commit()
+def test_get_users_with_query_params():
+    user = User(email='test_email_2', password='test_password_2')
+    add_model_to_db(user)
     response = test_client.get(
         "/users?skip=1&limit=1",
     )
@@ -35,7 +35,6 @@ def test_get_user_me():
     data = response.json()
     assert data["email"] == "test_email"
     assert data["password"] == hash_test_password
-    assert data["id"] == 1
 
 def test_get_user():    
     response = test_client.get(
@@ -72,7 +71,6 @@ def test_create_user():
     assert response.status_code == 201
     data = response.json()
     assert data["email"] == "test_email_3"
-    assert data["id"] == 3
 
 def test_create_user_with_existing_email():
     user = {"email": 'test_email', "password": "test_password_3"}

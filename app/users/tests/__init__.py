@@ -1,6 +1,6 @@
-
 from app.users import models
-from app.tests.helpers import override_get_db, test_user
+from app.tests.helpers import override_get_db
+from app.users.tests.test_routes import test_user
 
 
 def fill_db_with_necessary_data():

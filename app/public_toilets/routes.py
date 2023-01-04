@@ -30,7 +30,7 @@ async def public_toilets(id: int = Path, db: Session = Depends(get_db)):
     return db_public_toilet
 
 
-@router.post("/")
+@router.post("/", status_code=201)
 async def public_toilets(public_toilet: schemas.PublicToilet, db: Session = Depends(get_db), current_user: User = Depends(get_current_user)):
     db_public_toilet = crud.get_public_toilet_by_name(db, name=public_toilet.name)
     if db_public_toilet:
