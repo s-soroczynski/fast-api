@@ -13,8 +13,8 @@ app = FastAPI()
 origins = [
     "http://localhost",
     "http://localhost:3000",
-    "http://localhost:3000/registration"
-    "http://localhost:3000/add-public-toilet"
+    "http://localhost:3000/registration",
+    "http://localhost:3000/add-public-toilet",
 ]
 
 app.add_middleware(

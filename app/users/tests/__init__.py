@@ -10,4 +10,5 @@ def fill_db_with_necessary_data():
     db.add(test_user)
     db.commit()
 
+
 fill_db_with_necessary_data()
