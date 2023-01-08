@@ -72,7 +72,6 @@ def test_create_public_toilet():
         "description": "test_description_3",
         "lng": "10",
         "lat": "10",
-        "rate": "1",
     }
     response = test_client.post(
         "/public-toilets",
@@ -94,7 +93,6 @@ def test_create_public_toilet_with_existing_name():
         "description": "test_description_3",
         "lng": "10",
         "lat": "10",
-        "rate": "1",
     }
     response = test_client.post(
         "/public-toilets",

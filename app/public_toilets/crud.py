@@ -23,7 +23,6 @@ def create_public_toilet(db: Session, public_toilet: schemas.PublicToilet, user:
         name=public_toilet.name,
         lat=public_toilet.lat,
         lng=public_toilet.lng,
-        rate=public_toilet.rate,
         user=user,
         description=public_toilet.description,
     )
