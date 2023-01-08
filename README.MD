@@ -14,6 +14,10 @@ backend should be available at **http://127.0.0.1:8000**
 
 to run tests db must be running, then run `pytest`
 
+### lint
+
+`black app/`
+
 ### helpers
 
 to find runing port type `sudo lsof -t -i:5432` and then u can kill it with `sudo kill -9 {id}` where **id** is returned from first command
