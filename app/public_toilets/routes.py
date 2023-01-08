@@ -44,3 +44,18 @@ async def public_toilets(
     return crud.create_public_toilet(
         db=db, public_toilet=public_toilet, user=current_user
     )
+
+
+@router.patch("/{id}", response_model=schemas.PublicToilet)
+async def update_public_toilet(
+    id: str,
+    item: schemas.PublicToilet,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user)):
+    existing_item = crud.get_public_toilet(db, id)
+    if existing_item is None:
+        raise HTTPException(
+            status_code=404,
+            detail=f"Public toilet with id {id} does not exist",
+        )
+    return crud.update_public_toilet(db, item=item, id=id)

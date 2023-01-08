@@ -102,3 +102,29 @@ def test_create_public_toilet_with_existing_name():
     assert response.status_code == 400
     data = response.json()
     assert data == {"detail": "Name already taken"}
+
+def test_update_public_toilet_with_existing_item():
+    test_public_toilet_3 = {
+        "rate": 5,
+    }
+    response = test_client.patch(
+        "/public-toilets/1",
+        headers={"Authorization": create_test_token()},
+        json=test_public_toilet_3,
+    )
+    assert response.status_code == 200
+    data = response.json()
+    assert data["rate"] == 5
+
+def test_create_public_toilet_with_existing_name():
+    test_public_toilet_3 = {
+        "rate": 5,
+    }
+    response = test_client.patch(
+        "/public-toilets/150",
+        headers={"Authorization": create_test_token()},
+        json=test_public_toilet_3,
+    )
+    assert response.status_code == 404
+    data = response.json()
+    assert data ==  {'detail': 'Public toilet with id 150 does not exist'}
