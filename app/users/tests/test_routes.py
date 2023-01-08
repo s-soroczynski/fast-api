@@ -13,7 +13,6 @@ def test_get_users():
     assert response.status_code == 200
     data = response.json()
     assert data[0]["email"] == "test_email"
-    assert data[0]["password"] == hash_test_password
 
 
 def test_get_users_with_query_params():
@@ -26,7 +25,6 @@ def test_get_users_with_query_params():
     data = response.json()
     assert len(data) == 1
     assert data[0]["email"] == "test_email_2"
-    assert data[0]["password"] == "test_password_2"
 
 
 def test_get_user_me():
@@ -36,7 +34,6 @@ def test_get_user_me():
     assert response.status_code == 200
     data = response.json()
     assert data["email"] == "test_email"
-    assert data["password"] == hash_test_password
 
 
 def test_get_user():

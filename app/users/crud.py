@@ -13,6 +13,9 @@ def get_user_by_email(db: Session, email: str):
 
 
 def get_users(db: Session, skip: int = 0, limit: int = 100):
+    db_users = db.query(models.User).offset(skip).limit(limit).all()
+    for user in db_users:
+        user.__delattr__('password')
     return db.query(models.User).offset(skip).limit(limit).all()
 
 
