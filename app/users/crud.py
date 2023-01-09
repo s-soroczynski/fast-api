@@ -19,9 +19,9 @@ def get_users(db: Session, skip: int = 0, limit: int = 100):
     return db.query(models.User).offset(skip).limit(limit).all()
 
 
-def create_user(db: Session, user: schemas.User):
-    hashed_password = pwd_context.hash(user.password)
-    db_user = models.User(email=user.email, password=hashed_password)
+def create_user(db: Session, item: schemas.User):
+    hashed_password = pwd_context.hash(item.password)
+    db_user = models.User(email=item.email, password=hashed_password)
     db.add(db_user)
     db.commit()
     db.refresh(db_user)
