@@ -34,13 +34,13 @@ async def public_toilets(id: int = Path, db: Session = Depends(get_db)):
 
 @router.post("/", status_code=201)
 async def public_toilets(
-    public_toilet: schemas.PublicToilet,
+    item: schemas.PublicToilet,
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_user),
 ):
-    db_public_toilet = crud.get_public_toilet_by_name(db, name=public_toilet.name)
+    db_public_toilet = crud.get_public_toilet_by_name(db, name=item.name)
     if db_public_toilet:
         raise HTTPException(status_code=400, detail="Name already taken")
     return crud.create_public_toilet(
-        db=db, public_toilet=public_toilet, user=current_user
+        db=db, item=item, user=current_user
     )
